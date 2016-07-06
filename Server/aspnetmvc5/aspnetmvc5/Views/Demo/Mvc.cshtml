@@ -1,0 +1,274 @@
+﻿@section styles {
+<link href="~/Content/mvc.css" rel="stylesheet" />
+}
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -                                                                        GET
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+<div class="row">
+    <div class="col-md-12">
+        <h2>GET</h2>
+        <p>
+            Examples using jQuery to send a GET request with inputs to various MVC actions so that we can test model binding.<br />
+            See <a href="~/Scripts/demo.js">Demo.js</a> for the $.ajax calls<br />
+            Open Fiddler, refresh this page, and observe the requests which $.ajax() actually sends.<br />
+            <strong>Click on a panel header to resend the request.</strong>
+        </p>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    <div class="panel panel-danger">
+        <div class="panel-heading"><h3 class="panel-title">Get_Default</h3></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                Request:
+<pre>
+$.ajax({
+    url: <span class="ajax-added">'/mvc/Get_Default'</span>,
+    type: 'GET',
+    dataType: 'json',
+    data: <span class="ajax-added">JSON.stringify({ a: 1, b: 'b string with spaces!', 
+        c: '2016-07-01' })</span>,
+    contentType: 'application/json'
+});
+</pre>
+            </div>
+            <div class="col-md-6">
+                Url:
+<pre id="Get_Default_Url"></pre>
+                Response:
+<pre id="Get_Default">
+</pre>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    <div class="panel panel-danger">
+        <div class="panel-heading"><h3 class="panel-title">Get_RequestBody_ModelBinder_JsonNet</h3></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                Request:
+<pre>
+$.ajax({
+    url: <span class="ajax-added">'/mvc/Get_RequestBody_ModelBinder_JsonNet'</span>,
+    type: 'GET',
+    dataType: 'json',
+    data: JSON.stringify({ a: 1, b: 'b string with spaces!', 
+        c: '2016-07-01' }),
+    contentType: 'application/json',
+                <span class="ajax-bad">processData: false</span>
+});
+</pre>
+                <span class="ajax-bad">processData: false</span> is supposed to get $.ajax to send data in requestbody (see <a href="http://api.jquery.com/jQuery.ajax/">docs</a>).
+                It doesn't work though: it always sends data in querystring (for GETs).
+            </div>
+            <div class="col-md-6">
+                Url:
+<pre id="Get_RequestBody_ModelBinder_JsonNet_Url"></pre>
+                Response:
+<pre id="Get_RequestBody_ModelBinder_JsonNet">
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    <div class="panel panel-success">
+        <div class="panel-heading"><h3 class="panel-title">Get_QueryString_ModelBinder_JsonNet</h3></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                Request:
+<pre>
+$.ajax({
+    url: <span class="ajax-added">'/mvc/Get_QueryString_ModelBinder_JsonNet'</span>,
+    type: 'GET',
+    dataType: 'json',
+    data: JSON.stringify({ a: 1, b: 'b string with spaces!', 
+        c: '2016-07-01' }),
+    contentType: 'application/json'
+});
+</pre>
+            </div>
+            <div class="col-md-6">
+                Url:
+<pre id="Get_QueryString_ModelBinder_JsonNet_Url"></pre>
+                Response:
+<pre id="Get_QueryString_ModelBinder_JsonNet">
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    <div class="panel panel-success">
+        <div class="panel-heading"><h3 class="panel-title">Get_JsonNet</h3></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                Request:
+<pre>
+$.ajax({
+    url: <span class="ajax-added">'/mvc/Get_JsonNet'</span>,
+    type: 'GET',
+    dataType: 'json',
+    data: { <span class="ajax-added">json:</span> JSON.stringify({ a: 1, b: 'b string with spaces!', 
+        c: '2016-07-01' }) },
+    contentType: 'application/json''
+});
+</pre>
+            </div>
+            <div class="col-md-6">
+                Url:
+<pre id="Get_JsonNet_Url"></pre>
+                Response:
+<pre id="Get_JsonNet">
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -                                                                        POST
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+<div class="row">
+    <div class="col-md-12">
+        <h2>POST</h2>
+        <p>Examples using jQuery to send a GET request with inputs to various MVC actions, so we can test model binding</p>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    <div class="panel panel-danger">
+        <div class="panel-heading"><h3 class="panel-title">Post_FormData_Default</h3></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                Request:
+<pre>
+$.ajax({
+    url: <span class="ajax-added">'/mvc/Post_FormData_Default'</span>,
+    type: <span class="ajax-added">'POST'</span>,
+    data: <span class="ajax-added">JSON.stringify({ a: 1, b: 'b string with spaces!',
+        c: '2016-07-01' })</span>
+});
+</pre>
+            </div>
+            <div class="col-md-6">
+                Url:
+<pre id="Post_FormData_Default_Url"></pre>
+                Response:
+<pre id="Post_FormData_Default">
+</pre>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    <div class="panel panel-danger">
+        <div class="panel-heading"><h3 class="panel-title">Post_RequestBody_Default</h3></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                Request:
+<pre>
+$.ajax({
+    url: <span class="ajax-added">'/mvc/Post_RequestBody_Default'</span>,
+    type: 'POST',
+    <span class="ajax-added">dataType: 'json'</span>,
+    data: JSON.stringify({ a: 1, b: 'b string with spaces!', 
+        c: '2016-07-01' }),
+    <span class="ajax-added">contentType: 'application/json'</span>
+});
+</pre>
+            </div>
+            <div class="col-md-6">
+                Url:
+<pre id="Post_RequestBody_Default_Url"></pre>
+                Response:
+<pre id="Post_RequestBody_Default">
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    <div class="panel panel-success">
+        <div class="panel-heading"><h3 class="panel-title">Post_FormData_JsonNet</h3></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                Request:
+<pre>
+$.ajax({
+    url: <span class="ajax-added">'/mvc/Post_FormData_JsonNet'</span>,
+    type: 'POST',
+    data: <span class="ajax-added">JSON.stringify({ a: 1, b: 'b string with spaces!',
+        c: '2016-07-01' })</span>
+});
+</pre>
+            </div>
+            <div class="col-md-6">
+                Url:
+<pre id="Post_FormData_JsonNet_Url"></pre>
+                Response:
+<pre id="Post_FormData_JsonNet">
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    <div class="panel panel-success">
+        <div class="panel-heading"><h3 class="panel-title">Post_RequestBody_JsonNet</h3></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                Request:
+<pre>
+$.ajax({
+    url: <span class="ajax-added">'/mvc/Post_RequestBody_JsonNet'</span>,
+    type: 'POST',
+    dataType: 'json',
+    data: { <span class="ajax-added">json:</span> JSON.stringify({ a: 1, b: 'b string with spaces!', 
+        c: '2016-07-01' }) },
+    <span class="ajax-added">contentType: 'application/json'</span>
+});
+</pre>
+            </div>
+            <div class="col-md-6">
+                Url:
+<pre id="Post_RequestBody_JsonNet_Url"></pre>
+                Response:
+<pre id="Post_RequestBody_JsonNet">
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/Scripts/demo.js"></script>
+}

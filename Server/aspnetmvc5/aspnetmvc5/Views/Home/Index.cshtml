@@ -1,0 +1,28 @@
+﻿<div class="jumbotron">
+    <h1>ASP.NET model binding</h1>
+    <p class="lead">
+        Demos show how model binding works on <a href="/Demo/Mvc">Mvc</a> and <a href="/Demo/WebApi">WebAPI</a> actions when called by jQuery GET / POST requests.<br />
+        <div class="panel panel-success">
+            <div class="panel-heading"><h3 class="panel-title">Conclusion</h3></div><div class="panel-body">
+    <p>
+        MVC provides a <a href="http://www.asp.net/mvc/overview/getting-started/introduction/adding-validation">model validation framework</a> which actually makes things a bit more complex than it needs to be when all you want to do is send json back and forth and are happy to do your own validation.
+        This is because each field of a json object needs to be validated individually - see <a href="http://haacked.com/archive/2011/06/30/whatrsquos-the-difference-between-a-value-provider-and-model-binder.aspx/">here</a> for info on the thinking behind this design.
+    </p>
+    <p>
+        If you want to opt out of this you have to jump through some hoops. There are a number of ways to do this
+        [<a href="https://json.codeplex.com/discussions/347099">1</a>],
+        [<a href="http://stackoverflow.com/questions/23995210/how-to-use-json-net-for-json-modelbinding-in-an-mvc5-project">2</a>],
+        [<a href="https://gist.github.com/DalSoft/1588818">3</a>].
+    </p>
+    <p>
+        However by far the simplest is to simply bypass the MVC <strong>value provider</strong> / <strong>model binder</strong> framework alltogether and just send json inputs as strings.
+        This means you are free to use whichever json deserializer you like, you don't run into Maximum length issues, you're not stuck with the shitty Json deserializer that MVC defaults to etc...
+        No doubt <a href="http://stackoverflow.com/questions/17713412/cors-post-requests-not-working-options-bad-request-the-origin-is-not-allow/30574435?noredirect=1#comment63834282_30574435">punks</a> like this will tell you that this is the "wrong way to do things".
+    </p>
+    <p>
+        Finally, <strong>Fiddler</strong> is an invaluable tool for debugging these types of connectivity issues. There are some tricks to capture <strong>HttpClient</strong> requests (e.g. from a console app to your MVC/WebAPI actions) in Fiddler. I've compiled a list of steps which worked <a href="~/Demo/HttpClient">here</a>.
+    </p>
+</div>
+    </div>
+    </p>
+</div>
