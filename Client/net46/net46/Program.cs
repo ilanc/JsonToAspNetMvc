@@ -185,7 +185,7 @@ namespace net46
                     Content-Type: application/x-www-form-urlencoded; charset=UTF-8    
                     json=%7B%22a%22%3A1%2C%22b%22%3A%22b+string+with+spaces!%22%2C%22c%22%3A%222016-07-01%22%7D
 
-                http://localhost:64498/mvc/Post_RequestBody_JsonNet
+                http://localhost:64498/mvc/Post_RequestBody_ModelBinder_JsonNet
                     Content-Type: application/x-www-form-urlencoded; charset=UTF-8
                     json=%7B%22a%22%3A1%2C%22b%22%3A%22b+string+with+spaces!%22%2C%22c%22%3A%222016-07-01%22%7D
              */
@@ -205,18 +205,18 @@ namespace net46
             var post_urls = new List<PostSettings>
             {
                  new PostSettings { Url = @"http://localhost:64498/mvc/Post_FormData_Default", Tx = PostSettings.SendType.FormData },
-                 new PostSettings { Url = @"http://localhost:64498/mvc/Post_RequestBody_Default", Tx = PostSettings.SendType.Json_Default },
-                 new PostSettings { Url = @"http://localhost:64498/mvc/Post_FormData_JsonNet", Tx = PostSettings.SendType.Json_Custom },    // this 2 are the same (just testing [FromBody] in aspnetmvc5.Controllers.MvcController.Post_RequestBody_JsonNet)
-                 new PostSettings { Url = @"http://localhost:64498/mvc/Post_RequestBody_JsonNet", Tx = PostSettings.SendType.Json_Custom }, // this 2 are the same
+                 new PostSettings { Url = @"http://localhost:64498/mvc/Post_RequestBody_Default", Tx = PostSettings.SendType.Json_RequestBody },
+                 new PostSettings { Url = @"http://localhost:64498/mvc/Post_FormData_JsonNet", Tx = PostSettings.SendType.Json_FormData },
+                 new PostSettings { Url = @"http://localhost:64498/mvc/Post_RequestBody_ModelBinder_JsonNet", Tx = PostSettings.SendType.Json_RequestBody },
             };
             Console.WriteLine("--------------\nPost urls\n--------------");
             post_urls.ForEach(x => {
                 switch (x.Tx)
                 {
-                    case PostSettings.SendType.Json_Default:
+                    case PostSettings.SendType.Json_RequestBody:
                         PostUrlTxJsonRxJsonAsync(x.Url, jsonTx).Wait();
                         break;
-                    case PostSettings.SendType.Json_Custom:
+                    case PostSettings.SendType.Json_FormData:
                         PostUrlTxFormDataRxJsonAsync(x.Url, formdataJson).Wait();   // NOTE: sends formdata : json=formencoded(jsonTx)
                         break;
                     case PostSettings.SendType.FormData:
@@ -235,8 +235,8 @@ namespace net46
 
             public enum SendType
             {
-                Json_Default,   // json in requestbody, deserialized using default asp.net serializer
-                Json_Custom,    // json as string in formdata, deserialized using json.net serializer. (formdata => json=formencoded(jsonTx))
+                Json_RequestBody,   // json in requestbody, deserialized using default asp.net serializer by default, by json.net if [ModelBinder(typeof(JsonNetRequestBodyModelBinder))] used
+                Json_FormData,      // json as string in formdata, deserialized using json.net serializer. (formdata => json=formencoded(jsonTx))
                 FormData
             }
         }

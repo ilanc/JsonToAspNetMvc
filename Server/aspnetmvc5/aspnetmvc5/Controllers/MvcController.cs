@@ -146,11 +146,11 @@ namespace aspnetmvc5.Controllers
         }
 
         // See demo.js
-        // POST /mvc/Post_RequestBody_JsonNet
+        // POST /mvc/Post_RequestBody_ModelBinder_JsonNet
         [System.Web.Mvc.HttpPost]
-        public ActionResult Post_RequestBody_JsonNet([FromBody] string json)
+        public ActionResult Post_RequestBody_ModelBinder_JsonNet([ModelBinder(typeof(JsonNetRequestBodyModelBinder))] Inputs inputs)
         {
-            return DoActionString(json);
+            return DoAction(inputs);
         }
 
         #endregion

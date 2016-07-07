@@ -134,11 +134,13 @@ function Post_FormData_JsonNet() {
     });
 }
 
-function Post_RequestBody_JsonNet() {
+function Post_RequestBody_ModelBinder_JsonNet() {
     $.ajax({
-        url: '/mvc/Post_RequestBody_JsonNet',
+        url: '/mvc/Post_RequestBody_ModelBinder_JsonNet',
         type: 'POST',
-        data: { json: JSON.stringify({ a: 1, b: 'b string with spaces!', c: '2016-07-01' }) },
+        dataType: 'json',
+        data: JSON.stringify({ a: 1, b: 'b string with spaces!', c: '2016-07-01' }),
+        contentType: 'application/json',
         error: errorFn,
         success: successFn
     });
@@ -159,14 +161,14 @@ $('.panel-heading').click(function (x) {
 function init() {
     $('.panel pre[id]').html('Requesting...');
     setTimeout(function () {
-        Get_Default();
-        Get_RequestBody_ModelBinder_JsonNet();
-        Get_QueryString_ModelBinder_JsonNet();
-        Get_JsonNet();
-        Post_FormData_Default();
-        Post_RequestBody_Default();
-        Post_FormData_JsonNet();
-        Post_RequestBody_JsonNet();
+        //Get_Default();
+        //Get_RequestBody_ModelBinder_JsonNet();
+        //Get_QueryString_ModelBinder_JsonNet();
+        //Get_JsonNet();
+        //Post_FormData_Default();
+        //Post_RequestBody_Default();
+        //Post_FormData_JsonNet();
+        Post_RequestBody_ModelBinder_JsonNet();
     }, 1000);
 }
 
