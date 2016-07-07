@@ -161,13 +161,13 @@ $('.panel-heading').click(function (x) {
 function init() {
     $('.panel pre[id]').html('Requesting...');
     setTimeout(function () {
-        //Get_Default();
-        //Get_RequestBody_ModelBinder_JsonNet();
-        //Get_QueryString_ModelBinder_JsonNet();
-        //Get_JsonNet();
-        //Post_FormData_Default();
-        //Post_RequestBody_Default();
-        //Post_FormData_JsonNet();
+        Get_Default();
+        Get_RequestBody_ModelBinder_JsonNet();
+        Get_QueryString_ModelBinder_JsonNet();
+        Get_JsonNet();
+        Post_FormData_Default();
+        Post_RequestBody_Default();
+        Post_FormData_JsonNet();
         Post_RequestBody_ModelBinder_JsonNet();
     }, 1000);
 }
